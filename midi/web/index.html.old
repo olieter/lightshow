@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lightshow Control</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Lightshow</h1>
+  <div id="statusBar">
+    <span id="modeBadge">mode: —</span>
+    <span id="aiBadge">AI: —</span>
+    <span id="bandBadge">BAND: —</span>
+    <span id="netBadge">API: —</span>
+  </div>
+</header>
+
+<nav id="tabs">
+  <button data-tab="ai" class="tab active">AI</button>
+  <button data-tab="band" class="tab">Band</button>
+  <button data-tab="manual" class="tab">Manual</button>
+  <button data-tab="fixtures" class="tab">Fixtures</button>
+  <button data-tab="force" class="tab">Force</button>
+  <button data-tab="logs" class="tab">Logs</button>
+  <button data-tab="settings" class="tab">Settings</button>
+</nav>
+
+<main>
+  <!-- AI -->
+  <section id="ai" class="panel show">
+    <div class="row">
+      <div class="card">
+        <h3>Cluster & Sub</h3>
+        <div id="aiClusters" class="chip-list"></div>
+        <div id="aiSubs" class="chip-list subtle"></div>
+      </div>
+
+      <div class="card">
+        <h3>Kleur</h3>
+        <label><input type="checkbox" id="aiColorLock"> 1-kleur lock</label>
+        <input type="color" id="aiColorHex" value="#FFFFFF">
+        <div class="palette" id="aiQuickColors"></div>
+      </div>
+
+      <div class="card">
+        <h3>Doe mee</h3>
+        <div id="aiInclude" class="grid2"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="card">
+        <h3>Tubes & Guirlande</h3>
+        <div class="grid3">
+          <div>
+            <h4>Tube DMX</h4>
+            <div class="btns" id="aiTubeDMX"></div>
+          </div>
+          <div>
+            <h4>WLED Tubes L/R</h4>
+            <div class="btns" id="aiWLEDTubes"></div>
+          </div>
+          <div>
+            <h4>Guirlande</h4>
+            <div class="btns" id="aiGuirlande"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Audio (VU)</h3>
+        <div class="grid2">
+          <div>
+            <label>Bron</label>
+            <select id="audioSource">
+              <option value="usb">USB-in</option>
+              <option value="ipad_mic">iPad microfoon</option>
+            </select>
+          </div>
+          <div>
+            <label>AI Full</label>
+            <button class="pill" id="aiFullToggle">AI Full aan/uit</button>
+          </div>
+        </div>
+        <div id="vumeter"><div id="vu"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAND -->
+  <section id="band" class="panel">
+    <div class="row">
+      <div class="card">
+        <h3>Cluster</h3>
+        <div id="bandClusters" class="chip-list"></div>
+        <div id="bandSubs" class="chip-list subtle"></div>
+      </div>
+
+      <div class="card">
+        <h3>Kleur & Accent</h3>
+        <label><input type="checkbox" id="bandColorLock"> 1-kleur (mono)</label>
+        <input type="color" id="bandColorHex" value="#FFE6CC">
+        <div class="grid2">
+          <div>
+            <label>Accent kleur</label>
+            <input type="color" id="bandAccentHex" value="#FFB000">
+          </div>
+          <div>
+            <label>Accent %</label>
+            <input type="range" id="bandAccentPct" min="0" max="30" value="10">
+          </div>
+        </div>
+        <div class="palette" id="bandQuickColors"></div>
+      </div>
+
+      <div class="card">
+        <h3>Doe mee</h3>
+        <div id="bandInclude" class="grid2"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="card">
+        <h3>Show Control</h3>
+        <div class="btns">
+          <button id="bandPause" class="pill">Pause/Resume</button>
+          <button id="bandStop" class="pill warn">Stop</button>
+          <button id="aiToggle" class="pill">AI aan/uit</button>
+          <button id="aiFullToggle2" class="pill">AI Full aan/uit</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Rehearsal — Aim & Store</h3>
+        <div class="grid3">
+          <div>
+            <label>Target</label>
+            <select id="aimTarget">
+              <option value="vox">Vox</option>
+              <option value="git">Gitaar</option>
+              <option value="bass">Bass</option>
+              <option value="drums">Drums</option>
+              <option value="full">Full</option>
+              <option value="crowd">Crowd</option>
+              <option value="bandcrowd">Band+Crowd</option>
+              <option value="clear">Clear</option>
+            </select>
+          </div>
+          <div>
+            <label>Fixture</label>
+            <select id="aimFixture">
+              <option value="mh_L">MH L</option>
+              <option value="mh_R">MH R</option>
+              <option value="scan_L">Scanner L</option>
+              <option value="scan_R">Scanner R</option>
+              <option value="dual_scan">Dual Scan</option>
+              <option value="mpar_L">Moving PAR L</option>
+              <option value="mpar_R">Moving PAR R</option>
+            </select>
+          </div>
+          <div>
+            <label>Kleur (optie)</label>
+            <input type="color" id="aimColor" value="#FFFFFF">
+          </div>
+        </div>
+        <div class="grid3">
+          <div><label>Pan offset</label><input id="aimPan" type="number" value="0"></div>
+          <div><label>Tilt offset</label><input id="aimTilt" type="number" value="0"></div>
+          <div>
+            <label>Gobo</label>
+            <select id="aimGobo">
+              <option value="">—</option>
+              <option value="open">Open</option>
+              <option value="beam">Beam</option>
+              <option value="circle">Circle</option>
+              <option value="dot">Dot</option>
+              <option value="star">Star</option>
+            </select>
+          </div>
+        </div>
+        <div class="btns">
+          <button id="aimStore" class="pill">Store</button>
+          <button id="aimExit" class="pill">Exit</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANUAL -->
+  <section id="manual" class="panel">
+    <div class="row">
+      <div class="card">
+        <h3>Faders (zoals MIDImix)</h3>
+        <div class="grid4">
+          <div class="fader"><label>Blinder Top</label><input type="range" min="0" max="127" data-level="blinder_top"></div>
+          <div class="fader"><label>Blinder Bottom</label><input type="range" min="0" max="127" data-level="blinder_bottom"></div>
+          <div class="fader"><label>Tube DMX</label><input type="range" min="0" max="127" data-level="tube_dmx"></div>
+          <div class="fader"><label>WLED Tubes L/R</label><input type="range" min="0" max="127" data-level="wled_tubes_lr"></div>
+          <div class="fader"><label>Guirlande</label><input type="range" min="0" max="127" data-level="guirlande"></div>
+          <div class="fader"><label>PAR Groot</label><input type="range" min="0" max="127" data-level="par_big_all"></div>
+          <div class="fader"><label>PAR Klein</label><input type="range" min="0" max="127" data-level="par_small_all"></div>
+          <div class="fader"><label>Moving PAR L/R</label><input type="range" min="0" max="127" data-level="moving_par_lr"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Parameters</h3>
+        <div class="grid4">
+          <div><label>Strobe rate</label><input type="range" min="0" max="127" data-param="strobe_rate"></div>
+          <div><label>Strobe dim</label><input type="range" min="0" max="127" data-param="strobe_dim"></div>
+          <div><label>Wash dim</label><input type="range" min="0" max="127" data-param="washfx_dim"></div>
+          <div><label>Wash speed</label><input type="range" min="0" max="127" data-param="washfx_speed"></div>
+          <div><label>MH pan</label><input type="range" min="0" max="127" data-param="mh_pan"></div>
+          <div><label>MH tilt</label><input type="range" min="0" max="127" data-param="mh_tilt"></div>
+          <div><label>Scanner pan</label><input type="range" min="0" max="127" data-param="scanner_pan"></div>
+          <div><label>Scanner tilt</label><input type="range" min="0" max="127" data-param="scanner_tilt"></div>
+          <div><label>DualScan speed</label><input type="range" min="0" max="127" data-param="dualscan_speed"></div>
+          <div><label>AI variation</label><input type="range" min="0" max="127" data-param="ai_variation"></div>
+          <div><label>AI smooth</label><input type="range" min="0" max="127" data-param="ai_smooth"></div>
+          <div><label>AI colormix</label><input type="range" min="0" max="127" data-param="ai_colormix"></div>
+          <div><label>Band fill</label><input type="range" min="0" max="127" data-param="band_fill"></div>
+          <div><label>Master dim</label><input type="range" min="0" max="127" data-param="master_dim"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIXTURES -->
+  <section id="fixtures" class="panel">
+    <div class="row">
+      <div class="card">
+        <h3>MIDI Remap / Learn</h3>
+        <label><input type="checkbox" id="midiLearn"> Learn aan</label>
+        <p class="hint">Druk op een knop/CC → verschijnt in Logs → leg vast via remap-tab (toekomst) of bewaar handmatig in <code>config/midi_remap.json</code>.</p>
+      </div>
+
+      <div class="card">
+        <h3>Tuning (Aim offsets per fixture)</h3>
+        <div class="grid3">
+          <div>
+            <label>Fixture</label>
+            <select id="tunFixture">
+              <option value="mh_L">MH L</option><option value="mh_R">MH R</option>
+              <option value="scan_L">Scanner L</option><option value="scan_R">Scanner R</option>
+              <option value="dual_scan">Dual Scan</option>
+              <option value="mpar_L">Moving PAR L</option><option value="mpar_R">Moving PAR R</option>
+            </select>
+          </div>
+          <div><label>Pan off</label><input id="tunPan" type="number" value="0"></div>
+          <div><label>Tilt off</label><input id="tunTilt" type="number" value="0"></div>
+        </div>
+        <div class="grid2">
+          <div><label>Kleur fix</label><input type="color" id="tunColor" value="#FFFFFF"></div>
+          <div>
+            <label>Gobo fix</label>
+            <select id="tunGobo"><option value="">—</option><option>open</option><option>beam</option><option>circle</option><option>dot</option><option>star</option></select>
+          </div>
+        </div>
+        <div class="btns">
+          <button id="tunSave" class="pill">Opslaan</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORCE -->
+  <section id="force" class="panel">
+    <div class="card">
+      <h3>Extern (AUTO / FORCE A/B/C)</h3>
+      <div class="btns">
+        <button class="pill" data-force="0">AUTO</button>
+        <button class="pill" data-force="1">FORCE A</button>
+        <button class="pill" data-force="2">FORCE B</button>
+        <button class="pill" data-force="3">FORCE C</button>
+      </div>
+      <p class="hint">Stuurt door naar <code>http://192.168.4.200/mode?set=...</code> via backend.</p>
+    </div>
+  </section>
+
+  <!-- LOGS -->
+  <section id="logs" class="panel">
+    <div class="card">
+      <h3>Log</h3>
+      <pre id="logBox"></pre>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section id="settings" class="panel">
+    <div class="card">
+      <h3>Shutdown</h3>
+      <button id="shutdown" class="pill warn">Safe Shutdown</button>
+      <p class="hint">Alleen via iPad gebruiken.</p>
+    </div>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+body { font-family: sans-serif; background:#111; color:#eee; margin:0; }
+#navbar { background:#333; padding:6px; }
+#navbar button { margin:2px; padding:8px; }
+.tab { display:none; padding:10px; }
+button { background:#444; color:#fff; border:none; margin:2px; padding:8px; }
+button:hover { background:#666; }
+input, select { margin:4px; }
+pre { background:#000; color:#0f0; padding:8px; height:300px; overflow:auto; }
