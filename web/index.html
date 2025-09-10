@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Lightshow Control</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div id="navbar">
+    <button onclick="showTab('ai')">AI Mode</button>
+    <button onclick="showTab('band')">Band Mode</button>
+    <button onclick="showTab('manual')">Manual</button>
+    <button onclick="showTab('fixtures')">Fixtures</button>
+    <button onclick="showTab('force')">Force</button>
+    <button onclick="showTab('logs')">Logs</button>
+    <button onclick="showTab('settings')">Settings</button>
+  </div>
+
+  <!-- AI -->
+  <div class="tab" id="tab-ai">
+    <h2>AI Mode</h2>
+    <div id="ai-clusters" class="wrap"></div>
+    <div id="ai-subs" class="wrap"></div>
+    <label><input type="checkbox" id="ai_full"/> AI Full (auto subs)</label>
+    <label><input type="checkbox" id="ai_enabled"/> AI Enabled</label>
+    <h3>1-Color Lock</h3>
+    <input type="color" id="ai_color" value="#ffffff"/>
+    <button onclick="aiSetColor()">Set</button>
+    <h3>Include Fixtures</h3>
+    <div id="ai-include" class="wrap"></div>
+  </div>
+
+  <!-- Band -->
+  <div class="tab" id="tab-band">
+    <h2>Band Mode</h2>
+    <div id="band-clusters" class="wrap"></div>
+    <label><input type="checkbox" id="band_running"/> Running</label>
+    <label><input type="checkbox" id="band_paused"/> Paused</label>
+
+    <h3>Color Lock</h3>
+    <input type="color" id="band_color" value="#ffe6cc"/>
+    <button onclick="bandSetColor()">Set</button>
+
+    <h3>Palette</h3>
+    <select id="band_palette"></select>
+
+    <h3>Accent</h3>
+    <input type="color" id="band_accent" value="#ffb000"/>
+    <input type="number" id="band_accent_pct" min="0" max="100" value="10"/>
+    <button onclick="bandSetAccent()">Set Accent</button>
+
+    <h3>Include Fixtures</h3>
+    <div id="band-include" class="wrap"></div>
+
+    <h3>Aim & Store (Outlighting)</h3>
+    <div class="card">
+      <div class="row">
+        <label>Target
+          <select id="band-target">
+            <option value="vox">Vox</option>
+            <option value="git">Git</option>
+            <option value="bass">Bass</option>
+            <option value="drums">Drums</option>
+            <option value="full">Full Band</option>
+            <option value="crowd">Crowd</option>
+            <option value="bandcrowd">Band+Crowd</option>
+          </select>
+        </label>
+        <button onclick="bandPresetSave()">Save</button>
+        <button onclick="bandPresetLoad()">Load</button>
+      </div>
+      <p class="caps">Richt tijdens repetitie met Manual/Fixtures; Save per target. Tijdens show: Load of gebruik quick-positions (MIDImix rij 2).</p>
+    </div>
+  </div>
+
+  <!-- Manual -->
+  <div class="tab" id="tab-manual">
+    <h2>Manual Mode</h2>
+    <button onclick="setMode('manual')">Switch to Manual</button>
+
+    <h3>Levels (Faders)</h3>
+    <div class="grid">
+      <div class="card">
+        <h4>Blinders</h4>
+        <label>Top <input type="range" min="0" max="127" oninput="setLevel('blinder_top',this.value)"></label>
+        <label>Bottom <input type="range" min="0" max="127" oninput="setLevel('blinder_bottom',this.value)"></label>
+      </div>
+
+      <div class="card">
+        <h4>DMX Tube</h4>
+        <label>Dim <input type="range" min="0" max="127" oninput="setLevel('tube_dmx',this.value)"></label>
+        <label>Pattern
+          <select onchange="tubeSet('pattern',this.value)">
+            <option value="fade_up">Fade Up</option>
+            <option value="wave">Wave</option>
+            <option value="pulse">Pulse</option>
+            <option value="chaos">Chaos</option>
+            <option value="rainbow">Rainbow</option>
+          </select>
+        </label>
+        <label>Speed <input type="range" min="0" max="127" oninput="tubeSet('speed',this.value)"></label>
+        <label>Strobe <input type="range" min="0" max="127" oninput="tubeSet('strobe',this.value)"></label>
+        <button onclick="effect('tube_dmx','on_off')">On/Off</button>
+      </div>
+
+      <div class="card">
+        <h4>WLED Tubes (L+R)</h4>
+        <button onclick="effect('wled_tubes','on_off')">On/Off</button>
+        <label>FX
+          <select id="wled_tubes_fx" onchange="effect('wled_tubes',this.value)">
+            <option>Solid</option><option>Breathe</option><option>Blink</option><option>BPM</option>
+            <option>Chase</option><option>Theater</option><option>Scanner</option><option>Sinelon</option>
+            <option>Running</option><option>Juggle</option><option>Comet</option><option>Rainbow</option>
+          </select>
+        </label>
+        <label>Brightness <input type="range" min="0" max="127" oninput="setLevel('wled_tubes_lr',this.value)"></label>
+        <label>Kleur <input type="color" id="wled_tubes_color" value="#ffffff" onchange="wledColor('wled_tubes',this.value)"></label>
+      </div>
+
+      <div class="card">
+        <h4>Guirlande (WLED)</h4>
+        <button onclick="effect('guirlande','on_off')">On/Off</button>
+        <label>FX
+          <select id="guir_fx" onchange="effect('guirlande',this.value)">
+            <option>Solid</option><option>Breathe</option><option>Theater</option><option>Rainbow</option>
+          </select>
+        </label>
+        <label>Brightness <input type="range" min="0" max="127" oninput="setLevel('guirlande',this.value)"></label>
+        <label>Kleur <input type="color" id="guir_color" value="#ffe6cc" onchange="wledColor('guirlande',this.value)"></label>
+      </div>
+
+      <div class="card">
+        <h4>PARs</h4>
+        <label>PAR Groot (4) <input type="range" min="0" max="127" oninput="setLevel('par_big_all',this.value)"></label>
+        <label>PAR Klein (4) <input type="range" min="0" max="127" oninput="setLevel('par_small_all',this.value)"></label>
+        <label>Moving PAR L/R <input type="range" min="0" max="127" oninput="setLevel('moving_par_lr',this.value)"></label>
+      </div>
+
+      <div class="card">
+        <h4>Wash FX / Movers</h4>
+        <label>Wash Dim <input type="range" min="0" max="127" oninput="setParam('washfx_dim',this.value)"></label>
+        <label>Wash Speed <input type="range" min="0" max="127" oninput="setParam('washfx_speed',this.value)"></label>
+        <label>MH Pan <input type="range" min="0" max="127" oninput="setParam('mh_pan',this.value)"></label>
+        <label>MH Tilt <input type="range" min="0" max="127" oninput="setParam('mh_tilt',this.value)"></label>
+        <label>Scanner Pan <input type="range" min="0" max="127" oninput="setParam('scanner_pan',this.value)"></label>
+        <label>Scanner Tilt <input type="range" min="0" max="127" oninput="setParam('scanner_tilt',this.value)"></label>
+        <label>DualScan Speed <input type="range" min="0" max="127" oninput="setParam('dualscan_speed',this.value)"></label>
+      </div>
+
+      <div class="card">
+        <h4>Strobe DMX</h4>
+        <label>Rate <input type="range" min="0" max="127" oninput="setParam('strobe_rate',this.value)"></label>
+        <label>Dim <input type="range" min="0" max="127" oninput="setParam('strobe_dim',this.value)"></label>
+        <button class="danger" onmousedown="stroboMomentary()" onmouseup="stroboRelease()">Momentary</button>
+      </div>
+    </div>
+
+    <h3>Group Presets</h3>
+    <div class="card">
+      <div class="row">
+        <label>Group
+          <select id="gp-group">
+            <option>moving_head</option>
+            <option>scanner</option>
+            <option>moving_par</option>
+            <option>pars_big</option>
+            <option>pars_small</option>
+            <option>wash_fx</option>
+          </select>
+        </label>
+        <label>Preset
+          <select id="gp-name"></select>
+        </label>
+        <button onclick="applyGroupPreset()">Apply</button>
+      </div>
+    </div>
+
+    <h3>Per Fixture (Pan/Tilt/Dim/Strobe/Color/Gobo)</h3>
+    <div class="card">
+      <label>Fixture
+        <select id="man-fixture"></select>
+      </label>
+      <div id="man-caps" class="caps"></div>
+      <div id="man-controls">
+        <div id="ctl-pan"   class="ctl"><span>Pan</span>   <input type="range" min="0" max="255" oninput="fxSet('pan',this.value)"></div>
+        <div id="ctl-tilt"  class="ctl"><span>Tilt</span>  <input type="range" min="0" max="255" oninput="fxSet('tilt',this.value)"></div>
+        <div id="ctl-dim"   class="ctl"><span>Dim</span>   <input type="range" min="0" max="255" oninput="fxSet('dim',this.value)"></div>
+        <div id="ctl-stb"   class="ctl"><span>Strobe</span><input type="range" min="0" max="255" oninput="fxSet('strobe',this.value)"></div>
+        <div id="ctl-rgb"   class="ctl"><span>RGB</span>
+          R <input type="range" min="0" max="255" oninput="fxSet('r',this.value)">
+          G <input type="range" min="0" max="255" oninput="fxSet('g',this.value)">
+          B <input type="range" min="0" max="255" oninput="fxSet('b',this.value)">
+          W <input id="ctl-w" type="range" min="0" max="255" oninput="fxSet('w',this.value)">
+        </div>
+        <div id="ctl-hex" class="ctl"><span>Kleur</span> <input type="color" id="fx-hex" value="#ffffff" onchange="fxSet('hex',this.value)"></div>
+        <div id="ctl-gobo" class="ctl"><span>Gobo</span>
+          <select id="fx-gobo" onchange="fxSet('gobo',this.value)"></select>
+        </div>
+      </div>
+    </div>
+
+    <h3>Quick Scenes</h3>
+    <div class="card">
+      <input id="scene-name" placeholder="Scene naam">
+      <button onclick="sceneSave()">Opslaan</button>
+      <input id="scene-load-name" placeholder="Scene laden">
+      <button onclick="sceneLoad()">Laden</button>
+    </div>
+  </div>
+
+  <!-- Fixtures tab (offsets & MIDI-learn toggle) -->
+  <div class="tab" id="tab-fixtures">
+    <h2>Fixtures Rehearsal / Aim</h2>
+    <p>Select fixture, adjust Pan/Tilt/Color/Gobo, Save (offsets/fixes).</p>
+    <select id="fixture-select"></select>
+    <label>Pan: <input type="range" min="-128" max="128" id="fixture-pan"/></label>
+    <label>Tilt: <input type="range" min="-128" max="128" id="fixture-tilt"/></label>
+    <label>Color: <input type="color" id="fixture-color"/></label>
+    <label>Gobo: <input type="text" id="fixture-gobo"/></label>
+    <button onclick="fixtureSave()">Save Fixture</button>
+    <h3>MIDI Remap</h3>
+    <button onclick="midiLearnOn()">Enable Learn</button>
+    <button onclick="midiLearnOff()">Disable Learn</button>
+  </div>
+
+  <!-- Force -->
+  <div class="tab" id="tab-force">
+    <h2>Force Controller Switch</h2>
+    <button onclick="forceSet(0)">AUTO</button>
+    <button onclick="forceSet(1)">Force A</button>
+    <button onclick="forceSet(2)">Force B</button>
+    <button onclick="forceSet(3)">Force C</button>
+    <div id="force-status"></div>
+  </div>
+
+  <!-- Logs -->
+  <div class="tab" id="tab-logs">
+    <h2>System Logs</h2>
+    <pre id="logbox"></pre>
+  </div>
+
+  <!-- Settings -->
+  <div class="tab" id="tab-settings">
+    <h2>Settings</h2>
+    <button onclick="safeShutdown()">Shutdown Pi</button>
+    <h3>Audio Input</h3>
+    <select id="audio-input">
+      <option value="usb">USB In</option>
+      <option value="ipad">iPad Mic</option>
+    </select>
+    <label>Volume: <input type="range" min="0" max="100" id="audio-volume"/></label>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
