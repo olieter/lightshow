@@ -1,0 +1,12 @@
+[Unit]
+Description=Lightshow Backend
+After=network.target
+
+[Service]
+ExecStart=/home/pi/lightshow/venv/bin/python /home/pi/lightshow/app.py
+WorkingDirectory=/home/pi/lightshow
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target

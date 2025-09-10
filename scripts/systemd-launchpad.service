@@ -1,0 +1,12 @@
+[Unit]
+Description=Launchpad Bridge
+After=network.target lightshow.service
+
+[Service]
+ExecStart=/home/pi/lightshow/venv/bin/python /home/pi/lightshow/midi/launchpad_bridge_with_leds.py
+WorkingDirectory=/home/pi/lightshow
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target

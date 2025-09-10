@@ -1,0 +1,12 @@
+[Unit]
+Description=MIDImix Bridge
+After=network.target lightshow.service
+
+[Service]
+ExecStart=/home/pi/lightshow/venv/bin/python /home/pi/lightshow/midi/midimix_leds_daemon.py
+WorkingDirectory=/home/pi/lightshow
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
