@@ -1,0 +1,33 @@
+{
+  "palettes": {
+    "WarmWhite": "#FFE6CC",
+    "CoolWhite": "#F2F5FF",
+    "Amber": "#FFB000",
+    "Gold": "#FFC44D",
+    "Red": "#FF2E2E",
+    "Magenta": "#FF33CC",
+    "Pink": "#FF66CC",
+    "Blue": "#1E64FF",
+    "Cyan": "#00FFFF",
+    "Lime": "#99FF00",
+    "Green": "#00D46A",
+    "Teal": "#00CCAA",
+    "Purple": "#7A4CFF",
+    "UV": "#5500AA",
+    "Orange": "#FF6A00",
+    "Yellow": "#FFD000",
+    "White": "#FFFFFF"
+  },
+  "harmonies": {
+    "WarmMono":    ["WarmWhite","Gold","Amber","White"],
+    "CoolMono":    ["CoolWhite","Cyan","Blue","White"],
+    "PartyRGB":    ["Red","Green","Blue","White"],
+    "Retro":       ["Amber","Orange","Magenta","WarmWhite"],
+    "Tech":        ["Cyan","Teal","Blue","CoolWhite"],
+    "DnB":         ["Blue","Cyan","Purple","CoolWhite"],
+    "Psy":         ["Magenta","Purple","Cyan","UV"],
+    "SwingWorld":  ["WarmWhite","Gold","Amber","Pink"],
+    "SlowBallad":  ["WarmWhite","Pink","Magenta","Gold"],
+    "RockPop":     ["WarmWhite","Amber","Red","White"]
+  }
+}

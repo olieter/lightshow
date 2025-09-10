@@ -1,0 +1,40 @@
+{
+  "clusters": [
+    { "key": "intro",  "label": "Intro",
+      "subs": ["fade_in_warm", "spot_vox_soft", "pad_blue"] },
+
+    { "key": "verse",  "label": "Verse",
+      "subs": ["pop_balanced", "rock_tight", "retro_clean"] },
+
+    { "key": "chorus", "label": "Chorus",
+      "subs": ["wide_color", "uplift_white", "gold_energy"] },
+
+    { "key": "solo",   "label": "Solo",
+      "subs": ["guitar_spot", "keys_spot", "drum_break"] },
+
+    { "key": "outro",  "label": "Outro",
+      "subs": ["fade_out_warm", "slow_strobe_soft", "blue_pad"] },
+
+    { "key": "slow",   "label": "Slow",
+      "subs": ["warm_ballad", "soft_spots", "candle_white"] },
+
+    { "key": "heavy",  "label": "Heavy",
+      "subs": ["tight_beam", "red_energy", "white_kicks"] },
+
+    { "key": "party",  "label": "Party",
+      "subs": ["crowd_wave", "gold_twinkle", "confetti_colors"] }
+  ],
+
+  "solo_targets": ["vox", "git", "bass", "drums", "full", "crowd", "bandcrowd", "clear"],
+
+  "mono_defaults": {
+    "intro":  "#FFE6CC",
+    "verse":  "#FFE6CC",
+    "chorus": "#FFFFFF",
+    "solo":   "#FFFFFF",
+    "outro":  "#FFE6CC",
+    "slow":   "#FFE6CC",
+    "heavy":  "#FFFFFF",
+    "party":  "#FFB000"
+  }
+}

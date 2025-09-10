@@ -1,0 +1,27 @@
+{
+  "clusters": [
+    { "key": "rock_pop", "label": "Rock/Pop",
+      "subs": ["soft_rock", "pop_balanced", "rock_hard", "metal_light", "pop_ballad"] },
+
+    { "key": "tech_house", "label": "Tech/House",
+      "subs": ["tech_house", "techno", "house", "trance", "funky_house"] },
+
+    { "key": "goa_psy", "label": "GOA/PSY",
+      "subs": ["goa", "psytrance"] },
+
+    { "key": "dnb_dub", "label": "DNB/Dub",
+      "subs": ["dnb", "neuro_dnb", "liquid_dnb", "dub", "reggae"] },
+
+    { "key": "retro_7090", "label": "70/80/90",
+      "subs": ["70s_disco", "80s_pop", "90s_dance", "retro_rock", "italo_disco"] },
+
+    { "key": "party", "label": "Party",
+      "subs": ["apres_ski", "meezingers", "vlaamse_slagers", "charts", "mashup"] },
+
+    { "key": "electro_swing", "label": "ElectroSwing/World",
+      "subs": ["electro_swing", "balkan_beats", "world_fusion", "gypsy", "latin_party"] },
+
+    { "key": "slow", "label": "Slow",
+      "subs": ["slow_dance", "romantic", "ballad_pop", "acoustic", "ambient_pop"] }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "launchpad": {
+    "top_buttons": [
+      "blackout_all",
+      "blackout_keep_guir",
+      "full_on",
+      "blinder_25",
+      "blinder_50",
+      "blinder_75",
+      "blinder_100",
+      "full_toggle"
+    ],
+    "right_column": [
+      "ai_toggle",
+      "band_toggle",
+      "manual_toggle",
+      "force_auto",
+      "force_a",
+      "force_b",
+      "force_c",
+      "noop"
+    ],
+    "row1_ai_clusters": [
+      "rock_pop",
+      "tech_house",
+      "goa_psy",
+      "dnb_dub",
+      "retro_7090",
+      "party",
+      "electro_swing",
+      "slow"
+    ],
+    "row2_blinders": [
+      "top",
+      "bottom",
+      "ai_wave",
+      "ai_pulse",
+      "ai_lr",
+      "ai_chaos",
+      "fade_in",
+      "fade_out_long"
+    ],
+    "row3_strobo_fx": [
+      "ai_wave",
+      "ai_pulse",
+      "ai_lr",
+      "ai_chaos",
+      "only_par_ai",
+      "only_wash60_ai",
+      "only_movers_ai",
+      "tubes_ai_adj"
+    ],
+    "row4_tube_dmx": [
+      "on_off",
+      "wave",
+      "pulse",
+      "chaos",
+      "rainbow",
+      "ai_on",
+      "speed_plus",
+      "speed_minus"
+    ],
+    "row5_wled_tubes": [
+      "on_off",
+      "sinelon",
+      "scanner",
+      "bpm",
+      "static_cool",
+      "static_warm",
+      "cool_palette",
+      "ai_follow"
+    ],
+    "row6_guirlande": [
+      "on_off",
+      "breathe",
+      "theater",
+      "rainbow",
+      "static_ww",
+      "static_gold",
+      "static_ice",
+      "ai_follow"
+    ],
+    "row7_laser": [
+      "relay_toggle",
+      "laser_on",
+      "laser_off",
+      "audio_mic",
+      "audio_usb",
+      "fx1",
+      "fx2",
+      "depth_plus"
+    ],
+    "row8_misc": [
+      "relay",
+      "fx1",
+      "fx2",
+      "free",
+      "free",
+      "free",
+      "free",
+      "strobe_dmx_momentary"
+    ]
+  },
+  "midimix": {
+    "faders": [
+      "blinder_top",
+      "blinder_bottom",
+      "tube_dmx",
+      "wled_tubes_lr",
+      "guirlande",
+      "par_big_all",
+      "par_small_all",
+      "moving_par_lr"
+    ],
+    "knobsA": [
+      "strobe_rate",
+      "washfx_dim",
+      "mh_dim",
+      "scanner_dim",
+      "dualscan_dim",
+      "ai_variation",
+      "ai_smooth",
+      "ai_colormix"
+    ],
+    "knobsB": [
+      "strobe_dim",
+      "washfx_speed",
+      "mh_pan",
+      "mh_tilt",
+      "scanner_pan",
+      "scanner_tilt",
+      "dualscan_speed",
+      "master_dim"
+    ],
+    "knobsC": [
+      "fx_depth",
+      "free",
+      "free",
+      "band_fill",
+      "free",
+      "free",
+      "free",
+      "free"
+    ],
+    "top_buttons": [
+      "band_intro",
+      "band_verse",
+      "band_chorus",
+      "band_solo",
+      "band_outro",
+      "band_slow",
+      "band_heavy",
+      "band_party"
+    ],
+    "second_row": [
+      "pos_vox",
+      "pos_git",
+      "pos_bass",
+      "pos_drums",
+      "pos_full",
+      "pos_crowd",
+      "pos_bandcrowd",
+      "pos_clear"
+    ],
+    "right_buttons": [
+      "band_pause_toggle",
+      "band_stop",
+      "ai_toggle",
+      "ai_full_toggle"
+    ]
+  }
+}

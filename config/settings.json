@@ -1,0 +1,11 @@
+{
+  "dmx_universe": 0,
+  "audio": { "source": "usb", "rate": 44100, "chunk": 1024 }, 
+  "wled": {
+    "guirlande": "http://192.168.4.2/json/state",
+    "tube_L":   "http://192.168.4.3/json/state",
+    "tube_R":   "http://192.168.4.4/json/state"
+  },
+  "relay_laser": "http://192.168.4.5/json/state",
+  "force_bridge": "http://192.168.4.200"
+}

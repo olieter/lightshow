@@ -1,0 +1,14 @@
+{
+  "Solid": 0,
+  "Breathe": 1,
+  "Blink": 2,
+  "BPM": 3,
+  "Chase": 4,
+  "Theater": 5,
+  "Scanner": 6,
+  "Sinelon": 7,
+  "Running": 8,
+  "Juggle": 9,
+  "Comet": 10,
+  "Rainbow": 11
+}

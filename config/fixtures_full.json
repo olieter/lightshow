@@ -1,0 +1,234 @@
+{
+  "meta": {
+    "dmx_universe": 0,
+    "notes": "Caps = kunnen; ch = kanaaltoewijzing t.o.v. start. 'match_color' maakt 1-kleur locks mogelijk over RGB én color-wheel."
+  },
+
+  "color_palettes": {
+    "White": "#FFFFFF",
+    "WarmWhite": "#FFE6CC",
+    "CoolWhite": "#F2F5FF",
+    "Red": "#FF0000",
+    "Green": "#00FF00",
+    "Blue": "#0048FF",
+    "Cyan": "#00FFFF",
+    "Magenta": "#FF00FF",
+    "Yellow": "#FFD000",
+    "Amber": "#FFB000",
+    "Orange": "#FF6A00",
+    "Pink": "#FF66CC",
+    "UV": "#5500AA"
+  },
+
+  "groups": {
+    "blinders":    ["bl_top_L","bl_top_R","bl_bot_L","bl_bot_R"],
+    "fx_dimmer":   ["fx_L","fx_R"],
+    "strobe":      ["strobe_dmx"],
+    "tube_dmx":    ["tube_dmx"],
+    "laser":       ["laser_dmx"],
+    "pars_small":  ["par_small_L_mid","par_small_R_mid","par_small_L_rear","par_small_R_rear"],
+    "pars_big":    ["par_big_L","par_big_L_mid","par_big_R_mid","par_big_R"],
+    "dual_scan":   ["dualscan_L","dualscan_R"],
+    "scanner":     ["scanner_L","scanner_R"],
+    "moving_par":  ["mpar_L","mpar_R"],
+    "wash_fx":     ["wash_L","wash_R"],
+    "moving_head": ["mh_L","mh_R"]
+  },
+
+  "fixtures": {
+    "bl_top_L": { "start": 1, "ch": { "dim": 1 }, "caps": { "dimmer": true }, "limits":{} },
+    "bl_top_R": { "start": 2, "ch": { "dim": 1 }, "caps": { "dimmer": true }, "limits":{} },
+    "bl_bot_L": { "start": 3, "ch": { "dim": 1 }, "caps": { "dimmer": true }, "limits":{} },
+    "bl_bot_R": { "start": 4, "ch": { "dim": 1 }, "caps": { "dimmer": true }, "limits":{} },
+
+    "fx_L": { "start": 5, "ch": { "dim": 1 }, "caps": { "dimmer": true }, "limits":{} },
+    "fx_R": { "start": 6, "ch": { "dim": 1 }, "caps": { "dimmer": true }, "limits":{} },
+
+    "strobe_dmx": {
+      "start": 17,
+      "ch": { "rate": 1, "dim": 2 },
+      "caps": { "strobe": true, "strobe_rate": [0,255], "dimmer": true },
+      "limits":{}
+    },
+
+    "tube_dmx": {
+      "start": 19,
+      "mode": "full",
+      "modes": {
+        "simple": { "pattern": 1, "speed": 2, "strobe": 3, "dim": 4 },
+        "full":   { "pattern": 1, "speed": 2, "strobe": 3, "dim": 4, "macro": 5, "segment": 6 }
+      },
+      "ch": { "pattern": 1, "speed": 2, "strobe": 3, "dim": 4, "macro": 5, "segment": 6 },
+      "caps": { "dimmer": true, "strobe": true, "pattern": true, "speed": true, "macro": true, "segment": true },
+      "limits":{}
+    },
+
+    "laser_dmx": {
+      "start": 25,
+      "ch": { "mode": 1, "pattern": 2, "rotation": 3, "zoom": 4, "pan": 5 },
+      "caps": { "laser": true, "pattern": true, "rotation": true, "zoom": true, "pan": true },
+      "limits": { "pan_deg": 120 }
+    },
+
+    "par_small_L_mid":  {
+      "start": 33,
+      "ch": { "r": 1, "g": 2, "b": 3, "dim": 4, "strobe": 4 },
+      "caps": { "rgb": true, "dimmer": true, "strobe": true },
+      "match_color": { "rgb": true },
+      "limits":{}
+    },
+    "par_small_R_mid":  {
+      "start": 37,
+      "ch": { "r": 1, "g": 2, "b": 3, "dim": 4, "strobe": 4 },
+      "caps": { "rgb": true, "dimmer": true, "strobe": true },
+      "match_color": { "rgb": true },
+      "limits":{}
+    },
+    "par_small_L_rear": {
+      "start": 41,
+      "ch": { "r": 1, "g": 2, "b": 3, "dim": 4, "strobe": 4 },
+      "caps": { "rgb": true, "dimmer": true, "strobe": true },
+      "match_color": { "rgb": true },
+      "limits":{}
+    },
+    "par_small_R_rear": {
+      "start": 45,
+      "ch": { "r": 1, "g": 2, "b": 3, "dim": 4, "strobe": 4 },
+      "caps": { "rgb": true, "dimmer": true, "strobe": true },
+      "match_color": { "rgb": true },
+      "limits":{}
+    },
+
+    "par_big_L": {
+      "start": 49,
+      "ch": { "dim": 1, "r": 2, "g": 3, "b": 4, "strobe": 5, "macro": 6, "speed": 7 },
+      "caps": { "rgb": true, "dimmer": true, "strobe": true, "macro": true, "speed": true },
+      "match_color": { "rgb": true },
+      "limits":{}
+    },
+    "par_big_L_mid": {
+      "start": 57,
+      "ch": { "dim": 1, "r": 2, "g": 3, "b": 4, "strobe": 5, "macro": 6, "speed": 7 },
+      "caps": { "rgb": true, "dimmer": true, "strobe": true, "macro": true, "speed": true },
+      "match_color": { "rgb": true },
+      "limits":{}
+    },
+    "par_big_R_mid": {
+      "start": 65,
+      "ch": { "dim": 1, "r": 2, "g": 3, "b": 4, "strobe": 5, "macro": 6, "speed": 7 },
+      "caps": { "rgb": true, "dimmer": true, "strobe": true, "macro": true, "speed": true },
+      "match_color": { "rgb": true },
+      "limits":{}
+    },
+    "par_big_R": {
+      "start": 73,
+      "ch": { "dim": 1, "r": 2, "g": 3, "b": 4, "strobe": 5, "macro": 6, "speed": 7 },
+      "caps": { "rgb": true, "dimmer": true, "strobe": true, "macro": true, "speed": true },
+      "match_color": { "rgb": true },
+      "limits":{}
+    },
+
+    "dualscan_L": {
+      "start": 81,
+      "ch": { "pan1": 1, "tilt1": 2, "shutter1": 3, "gobo_color1": 4, "pan2": 5, "tilt2": 6, "shutter2": 7, "gobo_color2": 8 },
+      "caps": { "pan": true, "tilt": true, "strobe": true, "gobo_color_combo": true },
+      "match_color": {
+        "wheel_combo": {
+          "map": {
+            "White": 6, "Green": 18, "Yellow": 28, "Red+Green": 40, "Lime Flame": 52, "Pink": 64,
+            "RGB": 76, "Magenta": 88, "Blue Rings": 100, "Blue+Magenta": 112, "Green Raster": 124
+          },
+          "strategy": "closest_name"
+        }
+      },
+      "limits": { "pan_deg": 120, "tilt_deg": 90 }
+    },
+    "dualscan_R": {
+      "start": 89,
+      "ch": { "pan1": 1, "tilt1": 2, "shutter1": 3, "gobo_color1": 4, "pan2": 5, "tilt2": 6, "shutter2": 7, "gobo_color2": 8 },
+      "caps": { "pan": true, "tilt": true, "strobe": true, "gobo_color_combo": true },
+      "match_color": { "wheel_combo": { "map": { "White": 6, "Green": 18, "Yellow": 28, "Red+Green": 40, "Lime Flame": 52, "Pink": 64, "RGB": 76, "Magenta": 88, "Blue Rings": 100, "Blue+Magenta": 112, "Green Raster": 124 }, "strategy": "closest_name" } },
+      "limits": { "pan_deg": 120, "tilt_deg": 90 }
+    },
+
+    "scanner_L": {
+      "start": 101,
+      "ch": { "shutter": 1, "gobo": 2, "color": 3, "pan": 4, "tilt": 5 },
+      "caps": { "pan": true, "tilt": true, "gobo": true, "color_wheel": true, "strobe": true },
+      "match_color": {
+        "wheel": {
+          "map": { "White": 0, "Red": 20, "Yellow": 40, "Green": 60, "Cyan": 80, "Blue": 100, "Magenta": 120, "Orange": 140, "Pink": 160 },
+          "strategy": "closest_hex"
+        }
+      },
+      "limits": { "pan_deg": 80, "tilt_deg": 60 }
+    },
+    "scanner_R": {
+      "start": 108,
+      "ch": { "shutter": 1, "gobo": 2, "color": 3, "pan": 4, "tilt": 5 },
+      "caps": { "pan": true, "tilt": true, "gobo": true, "color_wheel": true, "strobe": true },
+      "match_color": {
+        "wheel": {
+          "map": { "White": 0, "Red": 20, "Yellow": 40, "Green": 60, "Cyan": 80, "Blue": 100, "Magenta": 120, "Orange": 140, "Pink": 160 },
+          "strategy": "closest_hex"
+        }
+      },
+      "limits": { "pan_deg": 80, "tilt_deg": 60 }
+    },
+
+    "mpar_L": {
+      "start": 113,
+      "ch": { "pan": 1, "pan_fine": 2, "tilt": 3, "tilt_fine": 4, "speed": 5, "dim": 6, "strobe": 7, "r": 8, "g": 9, "b": 10, "w": 11, "macro": 12, "reset": 13 },
+      "caps": { "pan": true, "tilt": true, "speed": true, "dimmer": true, "strobe": true, "rgbw": true, "macro": true, "reset": true },
+      "match_color": { "rgb": true, "white_channel": true },
+      "limits": { "pan_deg": 540, "tilt_deg": 270 }
+    },
+    "mpar_R": {
+      "start": 129,
+      "ch": { "pan": 1, "pan_fine": 2, "tilt": 3, "tilt_fine": 4, "speed": 5, "dim": 6, "strobe": 7, "r": 8, "g": 9, "b": 10, "w": 11, "macro": 12, "reset": 13 },
+      "caps": { "pan": true, "tilt": true, "speed": true, "dimmer": true, "strobe": true, "rgbw": true, "macro": true, "reset": true },
+      "match_color": { "rgb": true, "white_channel": true },
+      "limits": { "pan_deg": 540, "tilt_deg": 270 }
+    },
+
+    "wash_L": {
+      "start": 145,
+      "ch": { "pan": 1, "pan_fine": 2, "tilt": 3, "tilt_fine": 4, "speed": 5, "dim": 6, "strobe": 7, "r": 8, "g": 9, "b": 10, "w": 11, "macro": 12, "reset": 13 },
+      "caps": { "pan": true, "tilt": true, "speed": true, "dimmer": true, "strobe": true, "rgbw": true, "macro": true, "reset": true },
+      "match_color": { "rgb": true, "white_channel": true },
+      "limits": { "pan_deg": 540, "tilt_deg": 270 }
+    },
+    "wash_R": {
+      "start": 161,
+      "ch": { "pan": 1, "pan_fine": 2, "tilt": 3, "tilt_fine": 4, "speed": 5, "dim": 6, "strobe": 7, "r": 8, "g": 9, "b": 10, "w": 11, "macro": 12, "reset": 13 },
+      "caps": { "pan": true, "tilt": true, "speed": true, "dimmer": true, "strobe": true, "rgbw": true, "macro": true, "reset": true },
+      "match_color": { "rgb": true, "white_channel": true },
+      "limits": { "pan_deg": 540, "tilt_deg": 270 }
+    },
+
+    "mh_L": {
+      "start": 177,
+      "ch": { "pan": 1, "tilt": 2, "strobe": 3, "gobo": 4, "color": 5 },
+      "caps": { "pan": true, "tilt": true, "strobe": true, "gobo": true, "color_wheel": true },
+      "match_color": {
+        "wheel": {
+          "map": { "White": 0, "Red": 16, "Orange": 32, "Yellow": 48, "Green": 64, "Cyan": 96, "Blue": 128, "Magenta": 160, "Pink": 192 },
+          "strategy": "closest_hex"
+        }
+      },
+      "limits": { "pan_deg": 540, "tilt_deg": 230 }
+    },
+    "mh_R": {
+      "start": 185,
+      "ch": { "pan": 1, "tilt": 2, "strobe": 3, "gobo": 4, "color": 5 },
+      "caps": { "pan": true, "tilt": true, "strobe": true, "gobo": true, "color_wheel": true },
+      "match_color": {
+        "wheel": {
+          "map": { "White": 0, "Red": 16, "Orange": 32, "Yellow": 48, "Green": 64, "Cyan": 96, "Blue": 128, "Magenta": 160, "Pink": 192 },
+          "strategy": "closest_hex"
+        }
+      },
+      "limits": { "pan_deg": 540, "tilt_deg": 230 }
+    }
+  }
+}
